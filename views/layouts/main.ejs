@@ -1,17 +1,33 @@
 
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title><%= titulo %> · Reservas de Alojamientos</title>
-<link rel="stylesheet" href="/css/estilos.css">
-<script src="/js/app.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof titulo !== 'undefined' ? titulo : 'Reservas de Salas' %></title>
+  <link rel="stylesheet" href="/css/estilos.css">
 </head>
 <body>
-<%- include("../partials/encabezado") %>
-<main class="contenedor">
-<%- body %>
-</main>
-<%- include("../partials/pie") %>
+
+  <header>
+    <h1>Reservas de Salas de Estudio</h1>
+    <nav>
+      <a href="/">Inicio</a> | 
+      <a href="/reservas">Reservas</a> | 
+      <a href="/reservas/nueva">Nueva Reserva</a>
+    </nav>
+  </header>
+
+  <main class="contenedor">
+    <%- body %>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 - Trabajo Práctico 05</p>
+    <% if (locals.solicitudId) { %>
+      <small>ID Solicitud: <%= solicitudId %></small>
+    <% } %>
+  </footer>
+
 </body>
 </html>

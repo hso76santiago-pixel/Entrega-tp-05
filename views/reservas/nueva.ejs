@@ -1,48 +1,68 @@
+<header class="cabecera-pagina">
+  <div>
+    <p class="etiqueta">NUEVA RESERVA</p>
+    <h1><%= titulo %></h1>
+  </div>
+</header>
+
 <section class="panel-formulario">
-  
+
   <% if (typeof error !== 'undefined' && error) { %>
     <p class="error" role="alert"><%= error %></p>
   <% } %>
 
   <form action="/reservas" method="post" class="formulario">
 
-      
     <!-- Estudiante -->
-    <label for="estudiante">Estudiante</label>
-    <input type="text" id="estudiante" name="estudiante" value="<%= valores?.estudiante ?? '' %>" required>
+    <div class="form-group">
+      <label for="estudiante">Estudiante</label>
+      <input type="text" id="estudiante" name="estudiante" value="<%= valores?.estudiante ?? '' %>" required>
+    </div>
 
     <!-- Email -->
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" value="<%= valores?.email ?? '' %>" required>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" value="<%= valores?.email ?? '' %>" required>
+    </div>
 
-   <!-- Sala -->
-<label for="sala">Sala</label>
-<select id="sala" name="sala">
-  <option value="" disabled <%= !valores?.sala ? 'selected' : '' %>>Seleccioná una sala</option>
-  <option value="Sala Norte" <%= valores?.sala === 'Sala Norte' ? 'selected' : '' %>>Sala Norte</option>
-  <option value="Sala Sur" <%= valores?.sala === 'Sala Sur' ? 'selected' : '' %>>Sala Sur</option>
-  <option value="Sala Multimedia" <%= valores?.sala === 'Sala Multimedia' ? 'selected' : '' %>>Sala Multimedia</option>
-</select>
+    <!-- Sala -->
+    <div class="form-group">
+      <label for="sala">Sala</label>
+      <select id="sala" name="sala" required>
+        <option value="" disabled <%= !valores?.sala ? 'selected' : '' %>>Seleccioná una sala</option>
+        <% (salasPermitidas || []).forEach(salaOption => { %>
+          <option value="<%= salaOption %>" <%= valores?.sala === salaOption ? 'selected' : '' %>>
+            <%= salaOption %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
 
     <!-- Fecha -->
-    <label for="fecha">Fecha</label>
-    <input type="date" id="fecha" name="fecha" value="<%= valores?.fecha ?? '' %>" required>
+    <div class="form-group">
+      <label for="fecha">Fecha</label>
+      <input type="date" id="fecha" name="fecha" value="<%= valores?.fecha ?? '' %>" required>
+    </div>
 
     <!-- Turno -->
-    <label for="turno">Turno</label>
-    <select id="turno" name="turno" required>
-      <option value="" disabled <%= !valores?.turno ? 'selected' : '' %>>Seleccioná un turno</option>
-      <option value="Mañana" <%= valores?.turno === 'Mañana' ? 'selected' : '' %>>Mañana</option>
-      <option value="Tarde" <%= valores?.turno === 'Tarde' ? 'selected' : '' %>>Tarde</option>
-      <option value="Noche" <%= valores?.turno === 'Noche' ? 'selected' : '' %>>Noche</option>
-    </select>
+    <div class="form-group">
+      <label for="turno">Turno</label>
+      <select id="turno" name="turno" required>
+        <option value="" disabled <%= !valores?.turno ? 'selected' : '' %>>Seleccioná un turno</option>
+        <% (turnosPermitidos || []).forEach(turnoOption => { %>
+          <option value="<%= turnoOption %>" <%= valores?.turno === turnoOption ? 'selected' : '' %>>
+            <%= turnoOption %>
+          </option>
+        <% }) %>
+      </select>
+    </div>
 
     <!-- Personas -->
-<div class="form-group">
-  <label for="personas">Cantidad de Personas (1-6):</label>
-  <input type="number" id="personas" name="personas" min="1" max="6" value="<%= valores?.personas ?? '' %>" required>
-</div>
+    <div class="form-group">
+      <label for="personas">Cantidad de Personas (1-6):</label>
+      <input type="number" id="personas" name="personas" min="1" max="6" value="<%= valores?.personas ?? '' %>" required>
+    </div>
 
-    <button type="submit">Guardar Reserva</button>
+    <button type="submit" class="boton">Guardar Reserva</button>
   </form>
 </section>
