@@ -1,11 +1,14 @@
 {
-  "name": "tp-05-salas-middleware",
+  "name": "tp-06-salas-modular",
   "version": "1.0.0",
-  "description": "Aplicación web para consultar y reservar salas de estudio",
+  "description": "Aplicación web refactorizada para consultar y reservar salas de estudio",
   "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
-    "check": "node --check src/index.js"
+    "format": "prettier --write src",
+    "format:check": "prettier --check src",
+    "lint": "eslint src",
+    "check": "npm run format:check && npm run lint"
   },
   "keywords": [],
   "author": "Santiago Orellana",
@@ -15,5 +18,10 @@
     "express": "^4.22.3",
     "express-ejs-layouts": "^2.5.1",
     "morgan": "^1.12.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0"
   }
 }
